@@ -1,10 +1,5 @@
 package json.parser;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,57 +9,69 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class JsonReaderUtil {
 
-    /*
-      ToDo:API is given, This Rest API will give you a Json Array. It is parsed partially. Your task is to give the following output.
+	/*
+	 * ToDo:API is given, This Rest API will give you a Json Array. It is parsed
+	 * partially. Your task is to give the following output.
+	 * 
+	 * output:
+	 * 
+	 * "mrahman@gmail.com" "Matiur Rahman" "400k" "Finance" "mrahman@gmail.com"
+	 * "Rohan Rahman" "100k" "Engineering" "kafil@gmail.com" "Kafil" "200k"
+	 * "Backend End Team" "Dave@gmail.com" "David Lenard" "140k" "Engineering"
+	 * "rivera@gmail.com" "Rivera Dupp" "150k" "Finance" "Anand@gmail.com"
+	 * "Anand Thakkar" "120k" "SDET" "sumay@gmail.com" "Sumaya Akbar" "200k"
+	 * "Finance" "mrahman@gmail.com" "Mizanur Rahman" "400k" "Finance"
+	 * "mrahman2@gmail.com" "Mizanur Rahman" "405k" "Finance" "mdtaque@gmail.com"
+	 * "rifat taque" "400k" "QA" "mdtaque@gmail.com" "rifat taque" "400k" "QA"
+	 * 
+	 */
 
-      output:
+	public static void main(String[] args) throws MalformedURLException, IOException {
+		String sURL = "http://info.venturepulse.org:8080/service-webapp/api/AllEmployeeResources";
+		Employee emp = null;
+		List<Employee> empList = new ArrayList<>();
+		URL url = new URL(sURL);
+		URLConnection request = url.openConnection();
+		request.connect();
+		JsonArray jsonArray = null;
+		JsonParser jp = new JsonParser();
+		JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+		if (root instanceof JsonObject) {
+			JsonObject rootObj = root.getAsJsonObject();
+		} else if (root instanceof JsonArray) {
+			jsonArray = root.getAsJsonArray();
+		}
+		for (int i = 0; i < jsonArray.size(); i++) {
+			try {
+				JsonObject jsonobject = jsonArray.get(i).getAsJsonObject();
+				// you code start here
+				String empEmail = jsonobject.get("empEmail").toString();
+				System.out.print(empEmail + " ");
+				String empName = jsonobject.get("empName").toString();
+				System.out.print(empName + " ");
+				String salary = jsonobject.get("salary").toString();
+				System.out.print(salary + " ");
+				String department = jsonobject.get("department").toString();
+				System.out.print(department);
+				System.out.println();
+			} catch (Exception ex) {
 
-     "mrahman@gmail.com" "Matiur Rahman" "400k" "Finance"
-     "mrahman@gmail.com" "Rohan Rahman" "100k" "Engineering"
-     "kafil@gmail.com" "Kafil" "200k" "Backend End Team"
-     "Dave@gmail.com" "David Lenard" "140k" "Engineering"
-     "rivera@gmail.com" "Rivera Dupp" "150k" "Finance"
-     "Anand@gmail.com" "Anand Thakkar" "120k" "SDET"
-     "sumay@gmail.com" "Sumaya Akbar" "200k" "Finance"
-     "mrahman@gmail.com" "Mizanur Rahman" "400k" "Finance"
-     "mrahman2@gmail.com" "Mizanur Rahman" "405k" "Finance"
-     "mdtaque@gmail.com" "rifat taque" "400k" "QA"
-     "mdtaque@gmail.com" "rifat taque" "400k" "QA"
+			}
+		}
+		System.out.println("---------------------------------------");
+		// Print to the console.
+		for (Employee entry : empList) {
+			System.out.println(entry.getEmpEmail() + " " + entry.getEmpName() + " " + entry.getSalary() + " "
+					+ entry.getDepartment());
+		}
 
-     */
-
-    public static void main(String[] args)throws MalformedURLException, IOException {
-        String sURL = "http://info.venturepulse.org:8080/service-webapp/api/AllEmployeeResources";
-        Employee emp = null;
-        List<Employee> empList = new ArrayList<>();
-        URL url = new URL(sURL);
-        URLConnection request = url.openConnection();
-        request.connect();
-        JsonArray  jsonArray = null;
-        JsonParser jp = new JsonParser();
-        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-        if (root instanceof JsonObject) {
-            JsonObject rootObj = root.getAsJsonObject();
-        } else if (root instanceof JsonArray) {
-            jsonArray =  root.getAsJsonArray();
-        }
-        for (int i = 0; i < jsonArray.size()-1; i++) {
-            try {
-                JsonObject jsonobject = jsonArray.get(i).getAsJsonObject();
-                //you code start here
-                String empEmail = jsonobject.get("empEmail").toString();
-                System.out.println(empEmail);
-
-            }catch(Exception ex){
-
-            }
-        }
-        //Print to the console.
-        for(Employee entry:empList){
-            System.out.println(entry.getEmpEmail()+" "+entry.getEmpName()+" "+entry.getSalary()+" "+entry.getDepartment());
-        }
-    }
+	}
 
 }

@@ -3,18 +3,29 @@ Please read the questions and answer.
 
 What is Database?
 A.
-
+structured set of data in a computer
 What is DBMS?
+database management system, software used to manage data in a database, store/retrieve.
 What is the difference between SQL and MySQL?
+sql is a set of commands used to access,update and manipulate data in a database while mysql is a rdbms, a software that keeps the data organized/manages it.
 What is RDBMS? How is it different from DBMS?
+relational database, based on tables. Anything else different is called NRDBMS, and data is stores in documents(JSON),graphs,key-value pairs.
 What are Tables and Fields?
+table is like a collection of similar data in a database in the form of a table. The fields of the table are the individual columns, a data structure for a single 
+piece of data.
 What is SQL?
+structured query language a domain specific language to manage databases. sql statements are used to perform tasks like update data 
+on a database, or retrieve data from a database.
 What are Constraints in SQL?
+specific rules for the data in a table,controls what type of data can go in the table, columns of the table. Like not null,unique,primary key,foreign.
 What is a Primary Key?
+field in a table which uniquely identifies each record in a database.table has only one primary key, cant be null values.
 What is a Foreign Key?
+a field or multiple fields in one table that is the primary key of another table,used to link two tables together.
 What is Normalization?
+process of organizing data in a  database to get rid of redundancy, repetition in data.
 What is Denormalization?
-
+combining data from various tables into one single table, which leads to redundant data, but increases performance for queries.
 You have 2 tables given below.
 
 Order Table:
@@ -33,14 +44,14 @@ CustomerID	   CustomerName	    CustomerPhone	     Country
 
 Please do the following on above Order table and Customer table:
 
-Inner Join:
-Left Join:
-Right Join:
-Full Join:
+Inner Join:SELECT * FROM order INNER JOIN customer on order.orderID=customer.customerID;
+Left Join:SELECT * FROM order LEFT JOIN customer on order.orderID=customer.customerID;
+Right Join:SELECT * FROM order RIGHT JOIN customer on order.orderID=customer.customerID;
+Full Join:SELECT * FROM order FULL OUTER JOIN customer on order.orderID=customer.customerID;
 
 On Customer Table, please Insert one row.
-
+INSERT INTO Customer(CustomerName,CustomerPhone,Country)values('Becky Hammond','1-718-888-9999','France');
 On Order Table, please Update one row.
-
+INSERT INTO Order(OrderID,CustomerID,OrderDate)values('56789',11,'2020-07-05');
 
 

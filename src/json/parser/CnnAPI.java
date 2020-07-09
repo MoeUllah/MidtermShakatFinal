@@ -8,7 +8,7 @@ public class CnnAPI {
       Fetch This following CNN API, It will return some news in Json data. Parse this data and construct
       https://newsapi.org/v2/top-headlines?sources=cnn&apiKey=YOUR_API_KEY
 
-      MY_API_KEY=0d9e35dfa3c140aab8bf9cdd70df957f
+      MY_API_KEY=c6ced4b2b8b24acd8a7ea4d27e2e8d8b
 
       After getting Json Format of the news, You can go to json validator link: https://jsonlint.com/ to see
       how it can be parsed.
